@@ -1,0 +1,1 @@
+export const requirements = ["Streaming de peliculas", "Plataforma de videojuegos", "Streaming de música"]

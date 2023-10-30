@@ -1,4 +1,5 @@
 import { students } from "./students.js";
+import { requirements } from "./requirements.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   renderAllStudents();
@@ -22,19 +23,26 @@ const resetGroupContainers = () => {
 
 const renderGroups = () => {
   const studentsCopy = [...students];
+  const requirementsCopy = [...requirements]
   resetGroupContainers();
 
-  for (let j = 0; j < groupContainers.length; j++) {
+  for (let j = 0; j < groupContainers.length ; j++) {
     for (let i = 0; i < students.length; i++) {
-      const randomNumberGenerator = Math.floor(
+
+      const studentsRng = Math.floor(
         Math.random() * studentsCopy.length
       );
-      groupContainers[
-        j
-      ].innerHTML += `<h5>${studentsCopy[randomNumberGenerator]}</h5>`;
-      studentsCopy.splice(randomNumberGenerator, 1);
+
+      const requirementsRng = Math.floor(
+        Math.random() * requirementsCopy.length
+      );
+
+      groupContainers[j].innerHTML += `<h5>${studentsCopy[studentsRng]}</h5>`;
+      studentsCopy.splice(studentsRng, 1);
 
       if (studentsCopy.length % 5 == 0 && i !== 0) {
+        groupContainers[j].innerHTML += `<h4 class="fw-bold">Tema: ${requirementsCopy[requirementsRng]}</h4>`;
+      requirementsCopy.splice(requirementsRng, 1);
         j++;
       }
     }
@@ -42,7 +50,7 @@ const renderGroups = () => {
 };
 
 const raffleButton = document.getElementById("raffle");
-raffleButton.addEventListener("click", renderGroups);
+raffleButton.addEventListener("click", renderGroups)
 
 const resetBtn = document.getElementById("reset");
 resetBtn.addEventListener("click", resetGroupContainers);
